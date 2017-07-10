@@ -326,6 +326,7 @@ cfg_new(gint version)
 
   cfg_tree_init_instance(&self->tree, self);
   cfg_register_builtin_plugins(self);
+  cfg_load_candidate_modules(self);
   return self;
 }
 
