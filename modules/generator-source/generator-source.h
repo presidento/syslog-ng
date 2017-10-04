@@ -17,6 +17,7 @@ struct _GeneratorSource
 {
   LogSource super;
   GeneratorSourceOptions *options;
+  struct iv_timer timer;
 };
 
 LogSource *generator_source_new(GeneratorSourceDriver *owner, GeneratorSourceOptions *options);
