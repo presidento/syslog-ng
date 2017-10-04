@@ -25,10 +25,13 @@
 #include "generator-source.h"
 #include <stdlib.h>
 #include <glib.h>
+#include "messages.h"
 
 static void
 _generator_source_driver_free(LogPipe *s)
 {
+  msg_error("X driver free");
+
   GeneratorSourceDriver *self = (GeneratorSourceDriver*) s;
 
   generator_source_options_free(self->options);
@@ -38,6 +41,8 @@ _generator_source_driver_free(LogPipe *s)
 static gboolean
 _generator_source_driver_deinit(LogPipe *s)
 {
+  msg_error("X driver deinit", NULL);
+
   GeneratorSourceDriver *self = (GeneratorSourceDriver*) s;
 
   if(self->source)
@@ -56,6 +61,8 @@ _generator_source_driver_deinit(LogPipe *s)
 static gboolean
 _generator_source_driver_init(LogPipe *s)
 {
+  msg_error("X driver init", NULL);
+
   GeneratorSourceDriver *self = (GeneratorSourceDriver*) s;
   GlobalConfig *cfg = log_pipe_get_config(s);
 
@@ -81,6 +88,8 @@ _generator_source_driver_init(LogPipe *s)
 LogDriver *
 generator_source_driver_new(GlobalConfig *cfg)
 {
+  msg_error("X driver new", NULL);
+
   GeneratorSourceDriver *self = g_new0(GeneratorSourceDriver, 1);
 
   log_src_driver_init_instance(&self->super, cfg);

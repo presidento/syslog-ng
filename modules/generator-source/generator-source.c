@@ -8,6 +8,8 @@
 static void
 _generator_source_free(LogPipe *s)
 {
+  msg_error("X source free", NULL);
+
   GeneratorSource* self = (GeneratorSource *) s;
 
   log_source_free(&self->super.super);
@@ -16,6 +18,8 @@ _generator_source_free(LogPipe *s)
 static gboolean
 _generator_source_deinit(LogPipe *s)
 {
+  msg_error("X source deinit", NULL);
+
   GeneratorSource* self = (GeneratorSource *) s;
 
   return TRUE;
@@ -24,6 +28,8 @@ _generator_source_deinit(LogPipe *s)
 static gboolean
 _generator_source_init(LogPipe *s)
 {
+  msg_error("X source init", NULL);
+
   GeneratorSource *self = (GeneratorSource *) s;
 
   if (!log_source_init(s))
@@ -35,6 +41,8 @@ _generator_source_init(LogPipe *s)
 LogSource *
 generator_source_new(GeneratorSourceDriver *owner, GeneratorSourceOptions *options)
 {
+  msg_error("X source new", NULL);
+
   GeneratorSource *self = g_new0(GeneratorSource, 1);
 
   log_source_init_instance(&self->super, owner->super.super.super.cfg);

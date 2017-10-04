@@ -23,16 +23,21 @@
 #include "generator-source-options.h"
 #include <stdlib.h>
 #include <glib.h>
+#include "messages.h"
 
 void
 generator_source_options_init(GeneratorSourceOptions *self, GlobalConfig *cfg, const gchar *group_name)
 {
+  msg_error("X options init", NULL);
+
   log_source_options_init(&self->super, cfg, group_name);
 }
 
 GeneratorSourceOptions *
 generator_source_options_new(void)
 {
+  msg_error("X options new", NULL);
+
   GeneratorSourceOptions *self = g_new0(GeneratorSourceOptions, 1);
   log_source_options_defaults(&self->super);
   return self;
@@ -41,6 +46,8 @@ generator_source_options_new(void)
 void
 generator_source_options_free(GeneratorSourceOptions *self)
 {
+  msg_error("X options free");
+
   log_source_options_destroy(&self->super);
   g_free(self);
 }
