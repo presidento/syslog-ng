@@ -22,6 +22,7 @@
 
 #include "generator-source-driver.h"
 #include "generator-source-options.h"
+#include "generator-source.h"
 #include <stdlib.h>
 #include <glib.h>
 
@@ -62,7 +63,7 @@ _generator_source_driver_init(LogPipe *s)
     return FALSE;
 
   generator_source_options_init(self->options, cfg, self->super.super.group);
-  /*
+
   self->source = generator_source_new(self, self->options);
   log_pipe_append(&self->source->super, s);
 
@@ -72,7 +73,7 @@ _generator_source_driver_init(LogPipe *s)
       self->source = NULL;
       return FALSE;
     }
-  */
+
   return TRUE;
 }
 
