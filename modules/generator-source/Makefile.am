@@ -3,6 +3,8 @@ modules_generator_source_libgenerator_source_la_SOURCES = \
   modules/generator-source/generator-source-grammar.y       \
   modules/generator-source/generator-source-driver.c        \
   modules/generator-source/generator-source-driver.h        \
+  modules/generator-source/generator-source-options.c        \
+  modules/generator-source/generator-source-options.h        \
   modules/generator-source/generator-source-parser.c        \
   modules/generator-source/generator-source-parser.h        \
   modules/generator-source/generator-source-plugin.c

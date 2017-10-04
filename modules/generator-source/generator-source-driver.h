@@ -25,6 +25,7 @@
 
 #include "driver.h"
 #include "logsource.h"
+#include "generator-source-options.h"
 
 typedef struct _GeneratorSourceDriver GeneratorSourceDriver;
 
@@ -32,6 +33,7 @@ struct _GeneratorSourceDriver
 {
   LogSrcDriver super;
   LogSource *source;
+  GeneratorSourceOptions *options;
 };
 
 LogDriver *generator_source_driver_new(GlobalConfig *cfg);

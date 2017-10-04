@@ -20,23 +20,31 @@
  *
  */
 
-#include "generator-source-driver.h"
 #include "generator-source-options.h"
 #include "messages.h"
 #include <stdlib.h>
 #include <glib.h>
 
-LogDriver *
-generator_source_driver_new(GlobalConfig *cfg)
+void
+generator_source_options_init(GeneratorSourceOptions *self, GlobalConfig *cfg, const gchar *group_name)
 {
-  msg_debug("generator_source driver new");
-  GeneratorSourceDriver *self = g_new0(GeneratorSourceDriver, 1);
-
-  log_src_driver_init_instance(&self->super, cfg);
-
-  self->options = generator_source_options_new();
-  log_source_options_defaults(&self->options->super);
-
-  return &self->super.super;
+  msg_debug("generator_source options init");
+  log_source_options_init(&self->super, cfg, group_name);
 }
 
+GeneratorSourceOptions *
+generator_source_options_new(void)
+{
+  msg_debug("generator_source options new");
+  GeneratorSourceOptions *self = g_new0(GeneratorSourceOptions, 1);
+  log_source_options_defaults(&self->super);
+  return self;
+}
+
+void
+generator_source_options_free(GeneratorSourceOptions *self)
+{
+  msg_debug("generator_source options free");
+  log_source_options_destroy(&self->super);
+  g_free(self);
+}
