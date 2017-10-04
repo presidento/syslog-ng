@@ -21,6 +21,7 @@
  */
 
 #include "generator-source-driver.h"
+#include "generator-source-options.h"
 #include <stdlib.h>
 #include <glib.h>
 
@@ -35,7 +36,8 @@ generator_source_driver_new(GlobalConfig *cfg)
   /* self->super.super.super.deinit = _generator_source_driver_deinit; */
   /* self->super.super.super.free_fn = _generator_source_driver_free; */
 
-  /* log_source_options_defaults(&self->options->super); */
+  self->options = generator_source_options_new();
+  log_source_options_defaults(&self->options->super);
 
   return &self->super.super;
 }
