@@ -20,55 +20,23 @@
  *
  */
 
-%code top {
-#include "generator-source-parser.h"
-
-}
-
-
-%code {
-
-#include "cfg-parser.h"
-#include "generator-source-grammar.h"
 #include "generator-source-driver.h"
-#include "syslog-names.h"
-#include "messages.h"
-#include "plugin.h"
-#include "cfg-grammar.h"
+#include <stdlib.h>
+#include <glib.h>
 
-#include <string.h>
+LogDriver *
+generator_source_driver_new(GlobalConfig *cfg)
+{
+  GeneratorSourceDriver *self = g_new0(GeneratorSourceDriver, 1);
 
+  log_src_driver_init_instance(&self->super, cfg);
+
+  /* self->super.super.super.init = _generator_source_driver_init; */
+  /* self->super.super.super.deinit = _generator_source_driver_deinit; */
+  /* self->super.super.super.free_fn = _generator_source_driver_free; */
+
+  /* log_source_options_defaults(&self->options->super); */
+
+  return &self->super.super;
 }
-
-%name-prefix "generator_source_"
-
-/* this parameter is needed in order to instruct bison to use a complete
- * argument list for yylex/yyerror */
-
-%lex-param {CfgLexer *lexer}
-%parse-param {CfgLexer *lexer}
-%parse-param {LogDriver **instance}
-%parse-param {gpointer arg}
-
-/* INCLUDE_DECLS */
-
-%token KW_GENERATOR
-
-%%
-
-start
-  : LL_CONTEXT_SOURCE first_rule          { YYACCEPT; }
-  ;
-
-first_rule
-  : KW_GENERATOR
-  {
-      *instance = (LogDriver *)generator_source_driver_new(configuration);
-  }
-  '(' ')'
-  ;
-
-/* INCLUDE_RULES */
-
-%%
 

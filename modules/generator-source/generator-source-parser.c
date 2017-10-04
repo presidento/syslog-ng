@@ -30,6 +30,7 @@ int generator_source_parse(CfgLexer *lexer, LogDriver **instance, gpointer arg);
 
 static CfgLexerKeyword generator_source_keywords[] =
 {
+  { "generator", KW_GENERATOR },
   { NULL }
 };
 
