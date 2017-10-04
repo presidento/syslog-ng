@@ -20,30 +20,21 @@
  *
  */
 
+#ifndef generator_source_DRIVER_H_INCLUDED
+#define generator_source_DRIVER_H_INCLUDED
+
 #include "driver.h"
-#include "cfg-parser.h"
-#include "generator-source-grammar.h"
+#include "logsource.h"
 
-extern int generator_source_debug;
+typedef struct _GeneratorSourceDriver GeneratorSourceDriver;
 
-int generator_source_parse(CfgLexer *lexer, LogDriver **instance, gpointer arg);
-
-static CfgLexerKeyword generator_source_keywords[] =
+struct _GeneratorSourceDriver
 {
-  { "generator", KW_GENERATOR },
-  { NULL }
+  LogSrcDriver super;
+  LogSource *source;
 };
 
-CfgParser generator_source_parser =
-{
-#if ENABLE_DEBUG
-  .debug_flag = &generator_source_debug,
+LogDriver *generator_source_driver_new(GlobalConfig *cfg);
+
 #endif
-  .name = "generator-source",
-  .keywords = generator_source_keywords,
-  .parse = (gint (*)(CfgLexer *, gpointer *, gpointer)) generator_source_parse,
-  .cleanup = (void (*)(gpointer)) log_pipe_unref,
-};
-
-CFG_PARSER_IMPLEMENT_LEXER_BINDING(generator_source_, LogDriver **)
 

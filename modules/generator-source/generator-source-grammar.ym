@@ -30,6 +30,7 @@
 
 #include "cfg-parser.h"
 #include "generator-source-grammar.h"
+#include "generator-source-driver.h"
 #include "syslog-names.h"
 #include "messages.h"
 #include "plugin.h"
@@ -51,6 +52,8 @@
 
 /* INCLUDE_DECLS */
 
+%token KW_GENERATOR
+
 %%
 
 start
@@ -58,7 +61,11 @@ start
   ;
 
 first_rule
-  :
+  : KW_GENERATOR
+  {
+      *instance = (LogDriver *)generator_source_driver_new(configuration);
+  }
+  '(' ')'
   ;
 
 /* INCLUDE_RULES */
