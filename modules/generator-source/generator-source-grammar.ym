@@ -63,10 +63,20 @@ start
 first_rule
   : KW_GENERATOR
   {
-      *instance = (LogDriver *)generator_source_driver_new(configuration);
+      last_driver = *instance = (LogDriver *)generator_source_driver_new(configuration);
   }
-  '(' ')'
+  '(' generator_source_params ')'
   ;
+
+generator_source_params
+  : generator_source_param generator_source_params
+  |
+  ;
+
+generator_source_param
+  :
+  ;
+
 
 /* INCLUDE_RULES */
 
