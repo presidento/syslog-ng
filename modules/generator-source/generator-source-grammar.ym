@@ -31,6 +31,7 @@
 #include "cfg-parser.h"
 #include "generator-source-grammar.h"
 #include "generator-source-driver.h"
+#include "generator-source-options.h"
 #include "syslog-names.h"
 #include "messages.h"
 #include "plugin.h"
@@ -54,6 +55,7 @@
 
 %token KW_GENERATOR
 %token KW_FREQ
+%token KW_TEMPLATE
 
 %%
 
@@ -80,6 +82,12 @@ generator_source_param
       CHECK_ERROR(($3 > 0), @3, "the freq parameter must be positive.");
       ((GeneratorSourceDriver *)last_driver)->options->freq = $3;
   }
+  | KW_TEMPLATE '(' template_content ')'
+  {
+      generator_source_options_set_template(((GeneratorSourceDriver *)last_driver)->options, $3);
+  }
+  ;
+
   ;
 
 

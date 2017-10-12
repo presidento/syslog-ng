@@ -51,3 +51,10 @@ generator_source_options_free(GeneratorSourceOptions *self)
   log_source_options_destroy(&self->super);
   g_free(self);
 }
+
+void
+generator_source_options_set_template(GeneratorSourceOptions *self, LogTemplate *template)
+{
+  log_template_unref(self->template);
+  self->template = template;
+}
