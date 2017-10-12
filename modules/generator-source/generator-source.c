@@ -29,8 +29,6 @@
 
 #include <iv.h>
 
-#define GENERATOR_SOURCE_FREQUENCY 2
-
 LogMessage *
 _generator_source_new_log_msg()
 {
@@ -81,7 +79,9 @@ _generator_source_update_watch(void* p)
 
   iv_validate_now();
   self->timer.expires = iv_now;
-  self->timer.expires.tv_sec += GENERATOR_SOURCE_FREQUENCY;
+  int seconds = self->options->freq;
+  self->timer.expires.tv_sec += seconds;
+  self->timer.expires.tv_nsec += (self->options->freq - seconds) * 1e9;
   iv_timer_register(&self->timer);
 }
 

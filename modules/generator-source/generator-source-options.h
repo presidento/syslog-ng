@@ -32,6 +32,7 @@ typedef struct _GeneratorSourceOptions GeneratorSourceOptions;
 struct _GeneratorSourceOptions
 {
   LogSourceOptions super;
+  double freq;
 };
 
 void generator_source_options_init(GeneratorSourceOptions *self, GlobalConfig *cfg, const gchar *group_name);

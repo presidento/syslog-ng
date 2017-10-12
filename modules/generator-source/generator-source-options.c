@@ -25,6 +25,8 @@
 #include <stdlib.h>
 #include <glib.h>
 
+#define GENERATOR_SOURCE_DEFAULT_FREQUENCY 2.0
+
 void
 generator_source_options_init(GeneratorSourceOptions *self, GlobalConfig *cfg, const gchar *group_name)
 {
@@ -38,6 +40,7 @@ generator_source_options_new(void)
   msg_debug("generator_source options new");
   GeneratorSourceOptions *self = g_new0(GeneratorSourceOptions, 1);
   log_source_options_defaults(&self->super);
+  self->freq = GENERATOR_SOURCE_DEFAULT_FREQUENCY;
   return self;
 }
 

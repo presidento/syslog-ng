@@ -53,6 +53,7 @@
 /* INCLUDE_DECLS */
 
 %token KW_GENERATOR
+%token KW_FREQ
 
 %%
 
@@ -74,7 +75,11 @@ generator_source_params
   ;
 
 generator_source_param
-  :
+  : KW_FREQ '(' LL_FLOAT ')'
+  {
+      CHECK_ERROR(($3 > 0), @3, "the freq parameter must be positive.");
+      ((GeneratorSourceDriver *)last_driver)->options->freq = $3;
+  }
   ;
 
 
