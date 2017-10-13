@@ -57,15 +57,6 @@ _send_generator_source_message(void * p)
       LogMessage *msg;
 
       msg = _generator_source_new_log_msg();
-
-      GString *formatted_message = g_string_new("ping");
-      if (self->options->template)
-        {
-          log_template_format(self->options->template, msg, NULL, LTZ_LOCAL, 0, NULL, formatted_message);
-        }
-      log_msg_set_value(msg, LM_V_MESSAGE, formatted_message->str, -1);
-      g_string_free(formatted_message, TRUE);
-
       log_source_post(&self->super, msg);
     }
 }

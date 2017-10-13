@@ -55,6 +55,5 @@ generator_source_options_free(GeneratorSourceOptions *self)
 void
 generator_source_options_set_template(GeneratorSourceOptions *self, LogTemplate *template)
 {
-  log_template_unref(self->template);
-  self->template = template;
+  log_source_options_set_template(&self->super, template);
 }
