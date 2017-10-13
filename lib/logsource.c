@@ -319,6 +319,15 @@ log_source_queue(LogPipe *s, LogMessage *msg, const LogPathOptions *path_options
       log_msg_set_value(msg, LM_V_HOST, self->options->host_override, self->options->host_override_len);
     }
 
+  /* Source-side template */
+  if (self->options->template)
+    {
+      GString *formatted_message = g_string_new("");
+      log_template_format(self->options->template, msg, NULL, LTZ_SEND, 0, NULL, formatted_message);
+      log_msg_set_value(msg, LM_V_MESSAGE, formatted_message->str, -1);
+      g_string_free(formatted_message, TRUE);
+    }
+
   /* source specific tags */
   if (self->options->tags)
     {
@@ -501,6 +510,13 @@ log_source_options_set_tags(LogSourceOptions *options, GList *tags)
       g_free(tags->data);
       tags = g_list_delete_link(tags, tags);
     }
+}
+
+void
+log_source_options_set_template(LogSourceOptions *options, LogTemplate *template)
+{
+  log_template_unref(options->template);
+  options->template = template;
 }
 
 void
