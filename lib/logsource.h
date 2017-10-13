@@ -40,6 +40,7 @@ typedef struct _LogSourceOptions
   gint program_override_len;
   gchar *host_override;
   gint host_override_len;
+  LogTemplate *template;
   LogTagId source_group_tag;
   gboolean read_old_records;
   GArray *tags;
@@ -103,6 +104,7 @@ void log_source_options_defaults(LogSourceOptions *options);
 void log_source_options_init(LogSourceOptions *options, GlobalConfig *cfg, const gchar *group_name);
 void log_source_options_destroy(LogSourceOptions *options);
 void log_source_options_set_tags(LogSourceOptions *options, GList *tags);
+void log_source_options_set_template(LogSourceOptions *options, LogTemplate *template);
 void log_source_free(LogPipe *s);
 void log_source_wakeup(LogSource *self);
 void log_source_flow_control_adjust(LogSource *self, guint32 window_size_increment);
